@@ -4,7 +4,9 @@
       <v-layout justify-center align-center>
         <v-flex xs12 sm12 md5 lg4>
           <v-card class="text-center">
-            <v-card-title>VS Challange</v-card-title>
+            <v-card-title>
+              <v-img :src="vsLogo" contain max-height="50"></v-img>
+            </v-card-title>
             <v-card-text class="pa-6 text-center">
               <v-form
                 ref="loginFormRef"
@@ -34,7 +36,6 @@
                 >
                 </v-text-field>
                 <v-btn
-                  rounded
                   type="submit"
                   color="primary"
                   block
@@ -56,6 +57,8 @@
 import { mapActions } from "vuex"
 import { validateMixin } from "~/mixins/validateMixin"
 
+import vsLogo from "~/assets/images/vs-logo.png"
+
 export default {
   layout: "simple",
   head() {
@@ -65,6 +68,7 @@ export default {
   },
   data() {
     return {
+      vsLogo,
       seePassword: false,
       loginFormValid: false,
       loginForm: {
@@ -75,32 +79,16 @@ export default {
   },
   mixins: [validateMixin],
   methods: {
-    ...mapActions({
-      getProfilePermissions: "profilePermission/getProfilePermissions",
-    }),
     async handleLogin() {
       if (this.$refs.loginFormRef.validate()) {
         try {
           await this.$nuxt.$loading.start()
           await this.$auth.loginWith("local", { data: this.loginForm })
-          await this.handleLoadingMoreInformation()
-          await this.getProfilePermissions()
         } catch (error) {
           await this.$nuxt.$loading.finish()
         }
       }
     },
-    async handleLoadingMoreInformation() {
-      await this.getProfilePermissions()
-    },
   },
 }
 </script>
-
-<style scoped lang="scss">
-.icon-margin-login {
-  margin-left: -20px !important;
-  margin-right: 10px !important;
-  border-radius: 50% !important;
-}
-</style>

@@ -12,7 +12,6 @@ export default function ({ $axios, $toast, app }) {
         break
       case 401:
         $toast.global.unauthenticated()
-        app.$auth.logout()
         break
       case 400:
         $toast.error(error.response.data)

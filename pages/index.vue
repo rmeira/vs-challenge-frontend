@@ -25,9 +25,13 @@
 <script>
 import { mapGetters } from "vuex"
 export default {
+  head() {
+    return {
+      title: "Home",
+    }
+  },
   computed: {
     ...mapGetters({
-      users: "user/users",
       menu: "app/menu",
     }),
   },

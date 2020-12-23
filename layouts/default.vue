@@ -5,12 +5,14 @@
       :mini-variant.sync="miniSidebar"
       app
     >
-      <v-toolbar class="ml-0" fixed height="64">
-        <v-toolbar-title
-          v-if="!miniSidebar"
-          class="subtitle-1 font-weight-medium ml-3"
-        >
-          VS CHALLANGE
+      <v-toolbar
+        :class="miniSidebar ? 'padding-toolbar-content' : null"
+        fixed
+        height="64"
+      >
+        <v-img :src="vsIcon" v-if="miniSidebar" contain></v-img>
+        <v-toolbar-title v-else class="subtitle-1 font-weight-medium ml-3">
+          <v-img :src="vsLogo" contain></v-img>
         </v-toolbar-title>
       </v-toolbar>
 
@@ -72,11 +74,15 @@
 import { mapActions, mapGetters } from "vuex"
 
 import avatar from "~/assets/images/avatar.png"
+import vsLogo from "~/assets/images/vs-logo.png"
+import vsIcon from "~/assets/images/vs-icon.png"
 
 export default {
   data() {
     return {
       avatar,
+      vsLogo,
+      vsIcon,
       openSideBar: true,
       miniSidebar: false,
     }
@@ -88,3 +94,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.padding-toolbar-content .v-toolbar__content {
+  padding: 4px 12px !important;
+}
+</style>

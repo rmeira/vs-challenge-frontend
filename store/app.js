@@ -13,6 +13,12 @@ export const state = () => {
         route: "/users",
         exact: true,
       },
+      {
+        icon: "mdi-cup",
+        name: "Produtos",
+        route: "/products",
+        exact: true,
+      },
     ],
   }
 }
